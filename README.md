@@ -1,6 +1,6 @@
 # URL extensions
 
-[![CircleCI](https://circleci.com/gh/ambassify/url-extensions.svg?style=svg&circle-token=8907f8b5ae62aab17b3ee1a1077bd1528c0cecb6)](https://circleci.com/gh/ambassify/url-extensions)
+[![CircleCI](https://circleci.com/gh/ambassify/url-extensions.svg?style=svg)](https://circleci.com/gh/ambassify/url-extensions)
 
 Extensions to the nodejs url package.
 
