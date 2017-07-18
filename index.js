@@ -19,8 +19,11 @@ function applyQuery(url, query) {
     if (typeof query !== 'string')
         query = rebuildQuery(query);
 
+    if (typeof url === 'string')
+        url = URL.parse(url);
+
     url = Object.assign({}, url, {
-        search: '?' + rebuildQuery(query)
+        search: query ? '?' + query : ''
     });
 
     return URL.format(url);
