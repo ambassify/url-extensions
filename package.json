@@ -20,5 +20,16 @@
   },
   "dependencies": {
     "eslint": "^4.2.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambassify/url-extensions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ambassify/url-extensions/issues"
+  },
+  "homepage": "https://github.com/ambassify/url-extensions#readme"
 }
