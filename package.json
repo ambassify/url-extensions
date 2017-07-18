@@ -1,0 +1,24 @@
+{
+  "name": "@ambassify/url-extensions",
+  "version": "1.0.0",
+  "description": "Extensions to the nodejs url package.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm -s run test:lint && npm -s run test:unit",
+    "test:lint": "eslint index.js",
+    "test:unit": "nyc mocha"
+  },
+  "keywords": [
+    "url",
+    "extensions"
+  ],
+  "author": "Ambassify <dev@ambassify.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3"
+  },
+  "dependencies": {
+    "eslint": "^4.2.0"
+  }
+}

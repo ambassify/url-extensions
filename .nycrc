@@ -1,0 +1,7 @@
+{
+    "all": true,
+    "include": [
+        "index.js"
+    ],
+    "reporter": [ "text", "lcov", "json-summary" ]
+}
