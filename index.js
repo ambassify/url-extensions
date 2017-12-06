@@ -1,4 +1,5 @@
 var URL = require('url');
+var assign = require('lodash/assign');
 
 var extensions = {};
 extensions.URL = URL;
@@ -22,7 +23,7 @@ function applyQuery(url, query) {
     if (typeof url === 'string')
         url = URL.parse(url);
 
-    url = Object.assign({}, url, {
+    url = assign({}, url, {
         search: query ? '?' + query : ''
     });
 
@@ -31,7 +32,7 @@ function applyQuery(url, query) {
 
 function addQuery(url, additions) {
     var query = parseQuery(url);
-    query = Object.assign(query, additions);
+    query = assign(query, additions);
 
     return applyQuery(url, query);
 }
