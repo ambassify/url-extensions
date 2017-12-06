@@ -47,6 +47,28 @@ function removeQuery(url, deletions) {
     return applyQuery(url, query);
 }
 
+var CONCAT_RE_START = /^\/+/;
+var CONCAT_RE_END = /\/+$/;
+var CONCAT_RE_BOTH = /^\/+|\/+$/g;
+function concatPaths() {
+    var parts = new Array(arguments.length);
+    for (var i = parts.length - 1; i >= 0; --i) {
+        parts[i] = arguments[i];
+        
+        if (i === 0)
+            parts[i] = parts[i].replace(CONCAT_RE_END, '');
+        else if (i === parts.length - 1)
+            parts[i] = parts[i].replace(CONCAT_RE_START, '');
+        else
+            parts[i] = parts[i].replace(CONCAT_RE_BOTH, '');
+            
+        if (i !== 0 && !parts[i])
+            parts.splice(i, 1);
+    }
+
+    return parts.join('/') || '/';
+}
+
 extensions.query = {
     parse: parseQuery,
     rebuild: rebuildQuery,
@@ -56,6 +78,10 @@ extensions.query = {
     remove: removeQuery,
     omit: removeQuery,
     set: applyQuery
+};
+
+extensions.path ={
+    concat: concatPaths
 };
 
 module.exports = extensions;
