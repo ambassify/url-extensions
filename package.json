@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "eslint": "^4.2.0",
+    "lodash": "^4.0.0",
     "qs": "^6.5.0"
   },
   "directories": {
