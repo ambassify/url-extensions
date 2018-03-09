@@ -30,9 +30,16 @@ function applyQuery(url, query) {
     return URL.format(url);
 }
 
-function addQuery(url, additions) {
+function addQuery(url, additions, options) {
+    options = options || {};
+
     var query = parseQuery(url);
-    query = assign(query, additions);
+
+    if (options.preferNew || typeof options.preferNew === 'undefined') {
+        query = assign(query, additions);
+    } else {
+        query = assign({}, additions, query);
+    }
 
     return applyQuery(url, query);
 }
@@ -54,14 +61,14 @@ function concatPaths() {
     var parts = new Array(arguments.length);
     for (var i = parts.length - 1; i >= 0; --i) {
         parts[i] = arguments[i];
-        
+
         if (i === 0)
             parts[i] = parts[i].replace(CONCAT_RE_END, '');
         else if (i === parts.length - 1)
             parts[i] = parts[i].replace(CONCAT_RE_START, '');
         else
             parts[i] = parts[i].replace(CONCAT_RE_BOTH, '');
-            
+
         if (i !== 0 && !parts[i])
             parts.splice(i, 1);
     }

@@ -24,6 +24,16 @@ describe('URL', function() {
             assert.equal(next, 'https://www.google.com/?utm_campaign=url-extensions&utm_source=unit-test');
         });
 
+        it('Should add multiple query parameters when missing', function() {
+            var url = 'https://www.google.com?utm_campaign=Ambassify';
+            var next = URL.query.add(url, {
+                'utm_campaign': 'url-extensions',
+                'utm_source': 'unit-test'
+            }, { preferNew: false });
+
+            assert.equal(next, 'https://www.google.com/?utm_campaign=Ambassify&utm_source=unit-test');
+        });
+
         it('Should remove query parameters', function() {
             var url = 'https://www.google.com?utm_campaign=url-extensions&utm_source=unit-test';
             var next = URL.query.remove(url, ['utm_campaign']);
