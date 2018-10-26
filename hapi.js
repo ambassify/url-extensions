@@ -3,11 +3,18 @@ var assign = require('lodash/assign');
 var extensions = assign({}, require('./index'));
 var hapi = extensions.hapi = assign({}, extensions.hapi);
 
-hapi.forwarded = function hapiForwarded(request, type, hop = 0) {
-    const headers = request.headers || {};
-    const list = (headers[`x-forwarded-${type}`] || '')
+function trim(v) {
+    return v.replace(/^\s+|\s+$/ig, '');
+}
+
+hapi.forwarded = function hapiForwarded(request, type, hop) {
+    type = type.toLowerCase();
+    hop = hop || 0;
+
+    var headers = request.headers || {};
+    var list = (headers['x-forwarded-' + type] || '')
         .split(',')
-        .map(p => p.trim());
+        .map(trim);
 
     return list[hop];
 };
@@ -23,15 +30,26 @@ hapi.host = function hapiHost(request) {
 };
 
 hapi.requested = function hapiRequested(request) {
-    const host = hapi.host(request);
-    const proto = hapi.proto(request);
-    return `${proto}://${host}${request.url.path}`;
+    var host = hapi.host(request);
+    var proto = hapi.proto(request);
+
+    return [
+        proto,
+        '://',
+        host,
+        request.url.path
+    ].join('');
 };
 
 hapi.baseUrl = function hapiBaseUrl(request) {
-    const host = hapi.host(request);
-    const proto = hapi.proto(request);
-    return `${proto}://${host}`;
+    var host = hapi.host(request);
+    var proto = hapi.proto(request);
+
+    return [
+        proto,
+        '://',
+        host
+    ].join('');
 };
 
 module.exports = extensions;
