@@ -4,7 +4,8 @@ var extensions = assign({}, require('./index'));
 var hapi = extensions.hapi = assign({}, extensions.hapi);
 
 hapi.forwarded = function hapiForwarded(request, type, hop = 0) {
-    const list = (request.headers[`x-forwarded-${type}`] || '')
+    const headers = request.headers || {};
+    const list = (headers[`x-forwarded-${type}`] || '')
         .split(',')
         .map(p => p.trim());
 
@@ -28,8 +29,8 @@ hapi.requested = function hapiRequested(request) {
 };
 
 hapi.baseUrl = function hapiBaseUrl(request) {
-    const host = extras.host(request);
-    const proto = extras.proto(request);
+    const host = hapi.host(request);
+    const proto = hapi.proto(request);
     return `${proto}://${host}`;
 };
 
