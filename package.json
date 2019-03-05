@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm -s run test:lint && npm -s run test:unit",
-    "test:lint": "eslint index.js",
+    "test:lint": "eslint *.js",
     "test:unit": "nyc mocha"
   },
   "keywords": [
