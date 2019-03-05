@@ -1,7 +1,7 @@
 var URL = require('url');
 var assign = require('lodash/assign');
 
-var extensions = {};
+var extensions = Object.create(URL);
 extensions.URL = URL;
 extensions.qs = require('qs');
 
