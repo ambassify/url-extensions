@@ -54,5 +54,14 @@ describe('URL', function() {
 
             assert.equal(next, 'https://www.google.com/');
         });
+
+        it('Should handle deeply nested properties', function() {
+            var url = URL.URL.parse('https://www.google.com?test[field]=1');
+            var next = URL.query.add(url, {
+                test: { otherfield: 1 }
+            });
+
+            assert.equal(next, 'https://www.google.com/?test%5Bfield%5D=1&test%5Botherfield%5D=1');
+        });
     });
 });

@@ -1,9 +1,22 @@
 var URL = require('url');
-var assign = require('lodash/assign');
+var mergeWith = require('lodash/mergeWith');
 
 var extensions = Object.create(URL);
 extensions.URL = URL;
 extensions.qs = require('qs');
+
+function merge(base /*, updates... */) {
+    var args = [], args_i = arguments.length;
+    while (args_i-- > 1) args[args_i] = arguments[args_i];
+
+    args.unshift(base);
+    args.push(function(base, update) {
+        if (Array.isArray(base) || Array.isArray(update))
+            return update;
+    });
+
+    return mergeWith.apply(null, args);
+}
 
 function parseQuery(url) {
     if (typeof url === 'string')
@@ -23,7 +36,7 @@ function applyQuery(url, query) {
     if (typeof url === 'string')
         url = URL.parse(url);
 
-    url = assign({}, url, {
+    url = merge({}, url, {
         search: query ? '?' + query : ''
     });
 
@@ -36,9 +49,9 @@ function addQuery(url, additions, options) {
     var query = parseQuery(url);
 
     if (options.preferNew || typeof options.preferNew === 'undefined') {
-        query = assign(query, additions);
+        query = merge(query, additions);
     } else {
-        query = assign({}, additions, query);
+        query = merge({}, additions, query);
     }
 
     return applyQuery(url, query);
