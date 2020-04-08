@@ -28,7 +28,15 @@ describe('URL', function() {
                 assert.equal(ext.path.concat.apply(null, args), expected);
             }
         ));
-    
+
+        it('should escape path templates', () => {
+            const identityId = 'auth0:test';
+            const expected = `/identity/${encodeURIComponent(identityId)}`;
+            const result = ext.path.escape`/identity/${identityId}`;
+
+            assert.equal(result, expected);
+        })
+
     })
 
 });
