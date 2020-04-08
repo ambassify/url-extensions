@@ -89,6 +89,31 @@ function concatPaths() {
     return parts.join('/') || '/';
 }
 
+/**
+ * Use this as tagged template literals:
+ *
+ * pathEscape`/person/${id}/device/${deviceId}`
+ *
+ * will return a string in which `id` and `deviceId`
+ * have been url-encoded.
+ */
+function pathEscape(strings/* , ...args */) {
+    var args = [], args_i = arguments.length;
+    while (args_i-- > 1) args[args_i] = arguments[args_i];
+
+    var out = [];
+    var len = strings.length;
+
+    for (var i = 0; i < len; i++) {
+        out.push(strings[i]);
+
+        if (typeof args[i] != 'undefined')
+            out.push(encodeURIComponent(args[i]));
+    }
+
+    return out.join('');
+}
+
 extensions.query = {
     parse: parseQuery,
     rebuild: rebuildQuery,
@@ -100,8 +125,9 @@ extensions.query = {
     set: applyQuery
 };
 
-extensions.path ={
-    concat: concatPaths
+extensions.path = {
+    concat: concatPaths,
+    escape: pathEscape
 };
 
 module.exports = extensions;
