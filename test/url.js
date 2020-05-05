@@ -37,6 +37,14 @@ describe('URL', function() {
             assert.equal(result, expected);
         })
 
+        it('should escape path templates with more than one variable', () => {
+            const foo = 'foo';
+            const baz = 'baz';
+            const result = ext.path.escape`/${foo}/bar/${baz}`;
+
+            assert.equal(result, '/foo/bar/baz');
+        })
+
     })
 
 });
