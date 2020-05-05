@@ -1,6 +1,6 @@
 {
   "name": "@ambassify/url-extensions",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Extensions to the nodejs url package.",
   "main": "index.js",
   "scripts": {
