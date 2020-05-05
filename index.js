@@ -7,7 +7,7 @@ extensions.qs = require('qs');
 
 function merge(base /*, updates... */) {
     var args = [], args_i = arguments.length;
-    while (args_i-- > 1) args[args_i] = arguments[args_i];
+    while (args_i-- > 1) args[args_i - 1] = arguments[args_i];
 
     args.unshift(base);
     args.push(function(base, update) {
@@ -99,7 +99,7 @@ function concatPaths() {
  */
 function pathEscape(strings/* , ...args */) {
     var args = [], args_i = arguments.length;
-    while (args_i-- > 1) args[args_i] = arguments[args_i];
+    while (args_i-- > 1) args[args_i - 1] = arguments[args_i];
 
     var out = [];
     var len = strings.length;
