@@ -32,7 +32,9 @@ describe('Express', function () {
                     if (k == 'host')
                         return 'localhost:3000';
                     if (k == 'x-forwarded-host')
-                        return 'ambassify.com';
+                        return 'ambassify.com,ambassify.eu';
+                    if (k == 'x-forwared-proto')
+                        return 'https,http,http';
                 }
             };
 
