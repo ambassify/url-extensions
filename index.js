@@ -73,7 +73,7 @@ var CONCAT_RE_BOTH = /^\/+|\/+$/g;
 function concatPaths() {
     var parts = new Array(arguments.length);
     for (var i = parts.length - 1; i >= 0; --i) {
-        parts[i] = arguments[i];
+        parts[i] = '' + arguments[i];
 
         if (i === 0)
             parts[i] = parts[i].replace(CONCAT_RE_END, '');

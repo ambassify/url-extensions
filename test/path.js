@@ -7,7 +7,7 @@ describe('URL', function() {
     var ext = require('..');
 
     describe('Path', function() {
-        
+
         [
             { args: [ 'foo', 'bar' ], expected: 'foo/bar' },
             { args: [ 'foo', 'bar', 'baz' ], expected: 'foo/bar/baz' },
@@ -28,6 +28,12 @@ describe('URL', function() {
                 assert.equal(ext.path.concat.apply(null, args), expected);
             }
         ));
+
+        it('should concatenate non-string path parts', function() {
+            const parts = [ 'foo', 12, true ];
+            const expects = 'foo/12/true';
+            assert.strictEqual(ext.path.concat.apply(null, parts), expects);
+        })
 
         it('should escape path templates', () => {
             const identityId = 'auth0:test';
