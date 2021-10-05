@@ -33,7 +33,7 @@ describe('URL', function() {
             const parts = [ 'foo', 12, true ];
             const expects = 'foo/12/true';
             assert.strictEqual(ext.path.concat.apply(null, parts), expects);
-        })
+        });
 
         it('should escape path templates', () => {
             const identityId = 'auth0:test';
@@ -41,7 +41,7 @@ describe('URL', function() {
             const result = ext.path.escape`/identity/${identityId}`;
 
             assert.equal(result, expected);
-        })
+        });
 
         it('should escape path templates with more than one variable', () => {
             const foo = 'foo';
@@ -49,7 +49,23 @@ describe('URL', function() {
             const result = ext.path.escape`/${foo}/bar/${baz}`;
 
             assert.equal(result, '/foo/bar/baz');
-        })
+        });
+
+        [
+            { path: '/foo/bar', expected: '/foo/bar' },
+            { path: '/foo/./bar', expected: '/foo/bar' },
+            { path: './foo/bar', expected: '/foo/bar' },
+            { path: './foo/../../bar', expected: '/bar' },
+            { path: '/foo/.././bar', expected: '/bar' },
+            { path: '/foo/../bar', expected: '/bar' },
+            { path: '/foo/../bar/../../..', expected: '/' },
+            { path: '/foo/../bar/../../../baz', expected: '/baz' },
+        ].forEach(({ path, expected }) => it(
+            `Should normalize path: ${path}`,
+            function() {
+                assert.equal(ext.path.normalize(path), expected);
+            }
+        ));
 
     })
 

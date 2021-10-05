@@ -1,4 +1,5 @@
 var URL = require('url');
+var Path = require('path');
 var mergeWith = require('lodash/mergeWith');
 
 var extensions = Object.create(URL);
@@ -114,6 +115,20 @@ function pathEscape(strings/* , ...args */) {
     return out.join('');
 }
 
+/**
+ * Remove all relative path navigation from a path
+ *
+ */
+function pathNormalize(path, relativeTo) {
+    if (!relativeTo)
+        relativeTo = '/';
+
+    if (path[0] != '/')
+        path = relativeTo + path;
+
+    return Path.normalize(path);
+}
+
 extensions.query = {
     parse: parseQuery,
     rebuild: rebuildQuery,
@@ -127,7 +142,8 @@ extensions.query = {
 
 extensions.path = {
     concat: concatPaths,
-    escape: pathEscape
+    escape: pathEscape,
+    normalize: pathNormalize,
 };
 
 module.exports = extensions;
