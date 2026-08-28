@@ -21,6 +21,16 @@ URL.query.add('https://www.google.com', { hello: 'world' });
 // https://www.google.com?hello=world
 URL.query.omit('https://www.google.com?a=test&hello=world', ['a']);
 URL.query.remove('https://www.google.com?a=test&hello=world', ['a']);
+
+// hello=world&foo=bar
+URL.query.build({ hello: 'world', foo: 'bar' });
+URL.query.rebuild({ hello: 'world', foo: 'bar' });
+
+// { hello: 'world' }
+URL.query.parse('https://www.google.com/?hello=world');
+
+// https://www.google.com/foo/bar
+URL.path.concat('https://www.google.com', 'foo', 'bar');
 ```
 
 ## Contributing
