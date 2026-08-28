@@ -3,7 +3,8 @@
     "include": [
         "index.js",
         "express.js",
-        "hapi.js"
+        "hapi.js",
+        "ssrf.js"
     ],
     "reporter": [
         "text",
