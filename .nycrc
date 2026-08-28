@@ -1,7 +1,13 @@
 {
     "all": true,
     "include": [
-        "index.js"
+        "index.js",
+        "express.js",
+        "hapi.js"
     ],
-    "reporter": [ "text", "lcov", "json-summary" ]
+    "reporter": [
+        "text",
+        "lcov",
+        "json-summary"
+    ]
 }
